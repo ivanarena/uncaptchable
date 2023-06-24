@@ -3,6 +3,49 @@ const path = require('path');
 const fs = require('fs');
 
 class CaptchaFactory {
+    async generateImagesFromDataset() {
+        // 2d array: [folder, file]
+        const files = this.getAllPaths('./res/dataset/')
+
+        let backgroundIndex = 0;
+        let overlayIndex = 1;
+        while (backgroundIndex < files.length) { // pick every background folder
+            for (let backgroundImage of files[backgroundIndex]) { // pick every image in background folder
+                while (overlayIndex < files.length) { // loop through every other folder
+                    for (let overlayImage of files[overlayIndex]) { // overlay every image in overlay folder
+                        await this.overlayImages(
+                            backgroundImage,
+                            overlayImage,
+                            0.5,
+                            './res/generated/'
+                        );
+                    }
+                    overlayIndex++;
+                }
+                overlayIndex = backgroundIndex + 1;
+            }
+            backgroundIndex++;
+            overlayIndex = backgroundIndex + 1;
+        }
+    }
+
+    convertToBinary(imagePath) {
+        return fs.readFileSync(imagePath);
+    }
+
+    extractNamesFromFileName(fileName) {
+        fileName = this.getFileName(fileName);
+        const regex = /([^_]+)_\d+\w\+([^_]+)_\d+\w/;
+        const matches = fileName.match(regex);
+
+        if (matches && matches.length === 3) {
+            const answer1 = matches[1];
+            const answer2 = matches[2];
+            return [answer1, answer2];
+        }
+
+        return [];
+    }
 
     getAllPaths(directoryPath) {
         const absolutePath = path.resolve(directoryPath);
@@ -25,7 +68,7 @@ class CaptchaFactory {
         return paths;
     }
 
-    getFilename(filePath) {
+    getFileName(filePath) {
         const fileNameWithExtension = path.basename(filePath);
         const fileName = path.parse(fileNameWithExtension).name;
         return fileName;
@@ -59,7 +102,7 @@ class CaptchaFactory {
         ctx.drawImage(overlay, x, y, scaledWidth, scaledHeight);
 
         // Output the result to a file
-        const generatedImageFileName = this.getFilename(backgroundImagePath) + '+' + this.getFilename(overlayImagePath);
+        const generatedImageFileName = this.getFileName(backgroundImagePath) + '+' + this.getFileName(overlayImagePath);
         const outputPath = outputDirectory + generatedImageFileName + '.jpg'
         const out = fs.createWriteStream(outputPath);
         const stream = canvas.createJPEGStream();

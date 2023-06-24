@@ -7,34 +7,14 @@ class CaptchaUtils {
 
     async initialize() {
 
-        // await this.generateImagesFromDataset();
-        const generatedPath = captchaFactory.getAllPaths('./res/generated/')
-        console.log(generatedPath)
-    }
-
-    async generateImagesFromDataset() {
-        // 2d array: [folder, file]
-        const files = captchaFactory.getAllPaths('./res/dataset/')
-
-        let backgroundIndex = 0;
-        let overlayIndex = 1;
-        while (backgroundIndex < files.length) { // pick every background folder
-            for (let backgroundImage of files[backgroundIndex]) { // pick every image in background folder
-                while (overlayIndex < files.length) { // loop through every other folder
-                    for (let overlayImage of files[overlayIndex]) { // overlay every image in overlay folder
-                        await captchaFactory.overlayImages(
-                            backgroundImage,
-                            overlayImage,
-                            0.5,
-                            './res/generated/'
-                        );
-                    }
-                    overlayIndex++;
-                }
-                overlayIndex = backgroundIndex + 1;
-            }
-            backgroundIndex++;
-            overlayIndex = backgroundIndex + 1;
+        // await captchaFactory.generateImagesFromDataset();
+        const generatedPath = captchaFactory.getAllPaths('./res/generated/');
+        const generatedImage = './res/generated/airplane_01b+banana_01b.jpg';
+        for (let generatedImage of generatedPath) {
+            const imageData = captchaFactory.convertToBinary(generatedImage);
+            const answers = captchaFactory.extractNamesFromFileName(generatedImage);
+            console.log(answers);
+            this.create(imageData, answers);
         }
     }
 
@@ -51,6 +31,30 @@ class CaptchaUtils {
             .catch((err) => {
                 console.log(err);
             });
+    }
+
+    get() {
+
+        // Get the count of all users
+        Captcha.count().exec((count) => {
+
+            // Get a random entry
+            let random = Math.floor(Math.random() * count);
+
+            // Again query all users but only fetch one offset by our random #
+            Captcha.findOne().skip(random)
+                .then((result) => {
+                    return result;
+                }).catch((err) => {
+                    console.log(err);
+                    throw err;
+                });
+        }).then((result) => {
+            return result;
+        }).catch((err) => {
+            console.log(err);
+            throw err;
+        });
     }
 
     get(id) {

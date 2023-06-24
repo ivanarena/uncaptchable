@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const captchaSchema = new Schema({
     image: {
-        type: String,
+        type: Buffer,
         required: true
     },
     answers: {

@@ -8,7 +8,7 @@ UnCATPCHAble is a brand new CAPTCHA that makes life really hard for AIs while st
 # Run
 
 ```
-git clone 
+git clone git@github.com:ivanarena/uncaptchable.git
 cd uncaptchable
 node .
 ```

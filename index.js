@@ -3,7 +3,6 @@ const app = express();
 const PORT = 9999;
 const mongoose = require('mongoose');
 const CaptchaUtils = require('./captchaUtils');
-// not sure about this
 const captcha = new CaptchaUtils();
 
 // mongodb connection string
@@ -14,7 +13,7 @@ mongoose.connect(DB_URI)
             PORT,
             () => {
                 console.log(`API live on http://localhost:${PORT}`);
-                captcha.initialize();
+                // captcha.initialize();
             }
         )
     })
@@ -24,7 +23,16 @@ mongoose.connect(DB_URI)
 
 app.use(express.json());
 
-
+app.get('/captcha', (req, res) => {
+    captcha.get()
+        .then((requestedCaptcha) => {
+            res.status(200).send(requestedCaptcha);
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(401).send({ error: 'The requested CAPTCHA does not exist.' })
+        });
+});
 
 app.get('/captcha/:id', (req, res) => {
     const id = req.params.id;

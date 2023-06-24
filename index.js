@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 9999;
 const mongoose = require('mongoose');
-const CaptchaUtils = require('./captcha');
+const CaptchaUtils = require('./captchaUtils');
 // not sure about this
 const captcha = new CaptchaUtils();
 
@@ -14,7 +14,7 @@ mongoose.connect(DB_URI)
             PORT,
             () => {
                 console.log(`API live on http://localhost:${PORT}`);
-                // captcha.create();
+                captcha.initialize();
             }
         )
     })

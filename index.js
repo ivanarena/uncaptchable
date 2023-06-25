@@ -6,7 +6,7 @@ const CaptchaService = require('./captchaService');
 const captcha = new CaptchaService();
 
 // mongodb connection string
-const DB_URI = 'mongodb+srv://iarena:a280102@cluster0.ocgwopd.mongodb.net/uncaptchable'
+const DB_URI = 'mongodb+srv://user:user@cluster0.ocgwopd.mongodb.net/uncaptchable'
 mongoose.connect(DB_URI)
     .then((result) => {
         app.listen(
@@ -27,7 +27,6 @@ app.use(express.json());
 app.get('/captcha', (req, res) => {
     captcha.getOne()
         .then((requestedCaptcha) => {
-            // console.log('request  ', requestedCaptcha);
             res.status(200).send(requestedCaptcha);
         })
         .catch((err) => {

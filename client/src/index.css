@@ -5,7 +5,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Helvetica, sans-serif;
+  font-family: sans-serif;
+  width: 100%;
 }
 
 div.captcha-dialog {
@@ -117,5 +118,52 @@ button.refresh-btn {
 @media screen and (max-width: 480px) {
   div.option {
     width: 160px;
+  }
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.solved {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(12, 151, 12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInAnimation ease 1.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  flex-direction: column;
+  font-weight: bold;
+  color: white;
+
+}
+
+
+
+.check-mark {
+  font-size: 200px;
+  line-height: 1;
+  width: 1em;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    margin-left: 34%;
+    margin-bottom: 8%;
+    width: 0.35em;
+    height: 0.77em;
+    border: 0.15em solid #fff;
+    border-left: none;
+    border-top: none;
+    transform: rotate(0.125turn);
   }
 }

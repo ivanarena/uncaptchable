@@ -7,6 +7,7 @@ function App() {
   const [answers, setAnswers] = useState([]); // answers to submit
   const [options, setOptions] = useState([]); // options shown
   const [selectedOptions, setSelectedOptions] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+  const [solved, setSolved] = useState(false);
 
   const requestCaptcha = async () => {
     axios
@@ -30,10 +31,13 @@ function App() {
   }, [captcha]);
 
   useEffect(() => {
-    postAnswers();
+    console.log(answers)
+    if (answers.length === 2) postAnswers();
   }, [answers]);
 
 
+  useEffect(() =>
+    console.log(solved), [solved]);
   const checkAnswers = async () => {
     let userAnswers = [];
     for (let i = 0; i < selectedOptions.length; i++) {
@@ -48,10 +52,12 @@ function App() {
   }
 
   const postAnswers = async () => {
+    console.log('posting')
     axios
       .post(`http://localhost:9999/captcha/${captcha._id}/validate`, { "answers": answers })
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
+        setSolved(true);
       })
       .catch((err) => {
         console.log(err);
@@ -99,31 +105,45 @@ function App() {
     return imageSrc;
   }
 
+  const reset = (e) => {
+    e.preventDefault();
+    setSolved(false);
+    refreshCaptcha(e);
+  }
+
 
   return (
-    <main>
-      <header>
-        <h1>UnCAPTCHAble</h1>
-      </header>
-      <form className='captcha-form'>
-        <h1>What can you see in this picture?</h1>
-        <img alt='captcha' src={captcha && captcha.image ? getImageURL() : 'https://placehold.co/400x400'} />
-        <section className='options-container'>
-          {captcha && captcha.answers ?
-            captcha.answers.map((element, index) => (
-              <div
-                key={index}
-                className={toggleCheckedStyles(index)}
-                onClick={() => { toggleChecked(index); }}
-              >{element}</div>))
-            : 'loading'}
-        </section>
-        <section className='btns-wrap'>
-          <button className='refresh-btn' onClick={refreshCaptcha}>Refresh</button>
-          <button type='submit' onClick={handleSubmit}>Submit</button>
-        </section>
-      </form>
-    </main>
+    <>
+      {solved ? <div className="solved">
+        <p>Congrats, you solved the CAPTCHA correctly!</p>
+        <i class="check-mark"></i>
+        <button onClick={reset}>Reset</button>
+      </div > :
+        <main>
+          <header>
+            <h1>UnCAPTCHAble</h1>
+          </header>
+          <form className='captcha-form'>
+            <h1>What can you see in this picture?</h1>
+            <img alt='captcha' src={captcha && captcha.image ? getImageURL() : 'Loading image...'} />
+            <section className='options-container'>
+              {captcha && captcha.answers ?
+                captcha.answers.map((element, index) => (
+                  <div
+                    key={index}
+                    className={toggleCheckedStyles(index)}
+                    onClick={() => { toggleChecked(index); }}
+                  >{element}</div>))
+                : 'loading'}
+            </section>
+            <section className='btns-wrap'>
+              <button className='refresh-btn' onClick={refreshCaptcha}>Refresh</button>
+              <button type='submit' onClick={handleSubmit}>Submit</button>
+            </section>
+          </form>
+        </main>
+      }
+    </>
   );
 }
 

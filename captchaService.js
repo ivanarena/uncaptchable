@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const Captcha = require('./models/_captcha');
 const CaptchaFactory = require('./captchaFactory')
 const captchaFactory = new CaptchaFactory()
+const fs = require('fs');
 
-class CaptchaUtils {
+class CaptchaService {
+
 
     async initialize() {
-
-        // await captchaFactory.generateImagesFromDataset();
+        await captchaFactory.generateImagesFromDataset();
         const generatedPath = captchaFactory.getAllPaths('./res/generated/');
         const generatedImage = './res/generated/airplane_01b+banana_01b.jpg';
         for (let generatedImage of generatedPath) {
@@ -33,29 +34,19 @@ class CaptchaUtils {
             });
     }
 
-    get() {
+    getOne() {
+        return Captcha.count().then((count) => {
+            let random = Math.floor(Math.random() * count)
 
-        // Get the count of all users
-        Captcha.count().exec((count) => {
-
-            // Get a random entry
-            let random = Math.floor(Math.random() * count);
-
-            // Again query all users but only fetch one offset by our random #
-            Captcha.findOne().skip(random)
+            return Captcha.findOne().skip(random)
                 .then((result) => {
                     return result;
-                }).catch((err) => {
-                    console.log(err);
-                    throw err;
-                });
-        }).then((result) => {
-            return result;
-        }).catch((err) => {
-            console.log(err);
-            throw err;
-        });
+                })
+                .catch((err) => { console.log(err); })
+        })
+            .catch((err) => { console.log(err); });
     }
+
 
     get(id) {
         return Captcha.findById(id)
@@ -65,6 +56,26 @@ class CaptchaUtils {
                 console.log(err);
                 throw err;
             });
+    }
+
+    getIdList() {
+        const idList = []
+        return Captcha.find()
+            .select('_id')
+            .then((list) => {
+                for (let obj of list) {
+                    idList.push(obj['_id'])
+                }
+
+                // write to JSON file
+                const json = JSON.stringify(idList);
+                fs.writeFileSync('./res/idList.json', json);
+
+                return idList;
+            }).catch((err) => {
+                console.log(err);
+                throw err;
+            })
     }
 
     validate(id, answers) {
@@ -77,4 +88,4 @@ class CaptchaUtils {
     }
 }
 
-module.exports = CaptchaUtils;
+module.exports = CaptchaService;

@@ -3,6 +3,25 @@ const path = require('path');
 const fs = require('fs');
 
 class CaptchaFactory {
+    getIdList() {
+        fs.readFile('./res/idList.json', 'utf8', (err, data) => {
+            if (err) {
+                console.error('Error reading file:', err);
+                throw err;
+            } else {
+                const idList = JSON.parse(data);
+                return idList;
+            }
+        });
+    }
+
+    getRandomId() {
+        const idList = this.getIdList();
+        console.log(idList)
+        return idList;
+    }
+
+
     async generateImagesFromDataset() {
         // 2d array: [folder, file]
         const files = this.getAllPaths('./res/dataset/')

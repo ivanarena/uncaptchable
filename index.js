@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const PORT = 9999;
 const mongoose = require('mongoose');
-const CaptchaUtils = require('./captchaUtils');
-const captcha = new CaptchaUtils();
+const CaptchaService = require('./captchaService');
+const captcha = new CaptchaService();
 
 // mongodb connection string
 const DB_URI = 'mongodb+srv://iarena:a280102@cluster0.ocgwopd.mongodb.net/uncaptchable'
@@ -23,14 +23,27 @@ mongoose.connect(DB_URI)
 
 app.use(express.json());
 
+
 app.get('/captcha', (req, res) => {
-    captcha.get()
+    captcha.getOne()
         .then((requestedCaptcha) => {
+            // console.log('request  ', requestedCaptcha);
             res.status(200).send(requestedCaptcha);
         })
         .catch((err) => {
             console.log(err)
-            res.status(401).send({ error: 'The requested CAPTCHA does not exist.' })
+            res.status(401).send({ error: 'Bad request.' })
+        });
+});
+
+app.get('/captcha/list', (req, res) => {
+    captcha.getIdList()
+        .then((idList) => {
+            res.status(200).send(idList);
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(401).send({ error: 'Bad request.' })
         });
 });
 
@@ -46,6 +59,7 @@ app.get('/captcha/:id', (req, res) => {
             res.status(401).send({ error: 'The requested CAPTCHA does not exist.' })
         });
 });
+
 
 app.post('/captcha/:id/validate', (req, res) => {
     const id = req.params;

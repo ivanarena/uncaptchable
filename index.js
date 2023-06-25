@@ -61,8 +61,8 @@ app.get('/captcha/:id', (req, res) => {
 
 
 app.post('/captcha/:id/validate', (req, res) => {
-    const id = req.params;
-    const answers = req.body;
+    const id = req.params.id;
+    const answers = req.body.answers;
 
     captcha.validate(id, answers)
         .then((validation) => {

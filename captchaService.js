@@ -78,13 +78,20 @@ class CaptchaService {
             })
     }
 
-    validate(id, answers) {
-        // Retrieve the stored answer from the database based on the captchaId
-        const storedAnswers = [];
-
-        // Compare the stored answer with the submitted userCaptcha
-        // return storedAnswers === answers;
-        return true;
+    validate(id, userAnswers) {
+        return Captcha.findById(id).select('answers')
+            .then((result) => {
+                const correctAnswers = result.answers;
+                if (userAnswers.length === 2) {
+                    const caseOne = userAnswers[0] === correctAnswers[0] && userAnswers[1] === correctAnswers[1];
+                    const caseTwo = userAnswers[0] === correctAnswers[1] && userAnswers[1] === correctAnswers[0];
+                    return caseOne || caseTwo;
+                }
+                return false;
+            }).catch((err) => {
+                console.log(err);
+                throw err;
+            });
     }
 }
 

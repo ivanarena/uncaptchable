@@ -1,3 +1,25 @@
+/* poppins-500 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./fonts/poppins-v20-latin-500.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* poppins-700 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/poppins-v20-latin-700.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,7 +27,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   width: 100%;
 }
 
@@ -28,26 +50,27 @@ div.captcha-dialog {
 
 }
 
+h1 {
+  margin-top: 2vh;
+}
+
 .captcha-form h1 {
-  margin-top: 4vh;
+  margin-top: 0vh;
   margin-left: 2vw;
   margin-right: 2vw;
   margin-bottom: 2vh;
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
 }
 
-.captcha-form span {
-  margin-top: 4vh;
+.captcha-form img {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 2vh;
-}
-
-img.captcha-img {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-  width: 200px;
+  margin-top: 0vh;
+  margin-bottom: 4vh;
+  width: 320px;
+  border-radius: 10px;
 
 }
 
@@ -78,8 +101,10 @@ div.option {
   transition: 0.4s;
 }
 
-div.option:hover {
-  background-color: greenyellow;
+div.option:hover,
+.option.checked {
+  background-color: rgb(20, 125, 211);
+  color: white;
 }
 
 .option-checkbox {
@@ -97,9 +122,6 @@ form button {
   margin-bottom: 2vh;
 }
 
-.option.checked {
-  background-color: greenyellow;
-}
 
 .option.checked:hover {
   transform: scale(1.02, 1.02);
@@ -110,9 +132,6 @@ section.btns-wrap button {
   margin-right: 2vw;
 }
 
-button.refresh-btn {
-  background-color: rgb(233, 233, 233);
-}
 
 /* MOBILE SCREENS */
 @media screen and (max-width: 480px) {
@@ -166,4 +185,36 @@ button.refresh-btn {
     border-top: none;
     transform: rotate(0.125turn);
   }
+}
+
+button {
+  width: auto;
+  height: auto;
+  background-color: rgb(20, 125, 211);
+  border-style: none;
+  border-radius: 2em;
+  padding: 1em 2em 1em 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-family: 'poppins';
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  transition: 0.4s;
+  font-weight: bold;
+}
+
+button.refresh-btn {
+  background-color: rgb(197, 197, 197);
+  color: black;
+}
+
+a[role="button"]:hover,
+button:hover {
+  transform: scale(1.05, 1.05);
+  cursor: pointer;
 }

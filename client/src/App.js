@@ -33,6 +33,7 @@ function App() {
   useEffect(() => {
     console.log(answers)
     if (answers.length === 2) postAnswers();
+
   }, [answers]);
 
 
@@ -44,7 +45,8 @@ function App() {
       if (selectedOptions[i] === 1) userAnswers.push(options[i]);
     }
     if (userAnswers.length !== 2) {
-      refreshCaptcha();
+      uncheckOptions();
+      requestCaptcha();
     }
     else {
       setAnswers([...userAnswers]);
@@ -61,6 +63,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        uncheckOptions();
+        requestCaptcha();
       });
   }
 
@@ -107,8 +111,8 @@ function App() {
 
   const reset = (e) => {
     e.preventDefault();
-    setSolved(false);
     refreshCaptcha(e);
+    setSolved(false);
   }
 
 
@@ -117,7 +121,7 @@ function App() {
       {solved ? <div className="solved">
         <p>Congrats, you solved the CAPTCHA correctly!</p>
         <i class="check-mark"></i>
-        <button onClick={reset}>Reset</button>
+        <button className='refresh-btn' onClick={reset}>Reset</button>
       </div > :
         <main>
           <header>

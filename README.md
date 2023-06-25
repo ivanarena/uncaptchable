@@ -5,15 +5,22 @@ UnCATPCHAble is a brand new CAPTCHA that makes life really hard for AIs while st
 # Requirements
 - Node.js
 
-# Run
 
+# Installation
+## Clone
 ```
 git clone git@github.com:ivanarena/uncaptchable.git
+```
+
+## Run API 
+```
 cd uncaptchable
 node .
 ```
+## Run client
+```
+cd client
+npm start
+```
 
-test
-
-curl -X POST http://localhost:9999/captcha/6497505d0cfa81b6f2ff4723/validate -H "Content-Type: application/json" -d '{"answers": ["airplane", "banana"]}'
 

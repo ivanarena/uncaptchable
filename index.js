@@ -4,6 +4,8 @@ const PORT = 9999;
 const mongoose = require('mongoose');
 const CaptchaService = require('./captchaService');
 const captcha = new CaptchaService();
+const cors = require('cors')
+
 
 // mongodb connection string
 const DB_URI = 'mongodb+srv://user:user@cluster0.ocgwopd.mongodb.net/uncaptchable'
@@ -21,8 +23,8 @@ mongoose.connect(DB_URI)
 
 
 
+app.use(cors())
 app.use(express.json());
-
 
 app.get('/captcha', (req, res) => {
     captcha.getOne()

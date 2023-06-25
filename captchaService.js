@@ -6,6 +6,9 @@ const fs = require('fs');
 
 class CaptchaService {
 
+    categories = ['airplane', 'banana', 'baseball', 'beer', 'camel', 'car', 'carrot',
+        'cat', 'chair', 'cow', 'donut', 'elephant', 'horse', 'leopard', 'orange',
+        'owl', 'panda', 'piano', 'shark', 'train', 'zebra'];
 
     async initialize() {
         await captchaFactory.generateImagesFromDataset();
@@ -40,6 +43,11 @@ class CaptchaService {
 
             return Captcha.findOne().skip(random)
                 .then((result) => {
+                    let options = this.categories.filter(category => category !== result.answers[0] && category !== result.answers[1]);
+                    options = options.sort((a, b) => 0.5 - Math.random());
+                    for (let i = 0; i < 6; i++)
+                        result.answers.push(options[i]);
+                    result.answers = result.answers.sort((a, b) => 0.5 - Math.random());
                     return result;
                 })
                 .catch((err) => { console.log(err); })
@@ -51,6 +59,11 @@ class CaptchaService {
     get(id) {
         return Captcha.findById(id)
             .then((result) => {
+                let options = this.categories.filter(category => category !== result.answers[0] && category !== result.answers[1]);
+                options = options.sort((a, b) => 0.5 - Math.random());
+                for (let i = 0; i < 6; i++)
+                    result.answers.push(options[i]);
+                result.answers = result.answers.sort((a, b) => 0.5 - Math.random());
                 return result;
             }).catch((err) => {
                 console.log(err);

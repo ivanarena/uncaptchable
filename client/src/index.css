@@ -1,0 +1,121 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Helvetica, sans-serif;
+}
+
+div.captcha-dialog {
+  z-index: 2;
+}
+
+.captcha-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  position: fixed;
+  width: auto;
+  height: auto;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+}
+
+.captcha-form h1 {
+  margin-top: 4vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  margin-bottom: 2vh;
+}
+
+.captcha-form span {
+  margin-top: 4vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2vh;
+}
+
+img.captcha-img {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  width: 200px;
+
+}
+
+.options-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin-left: 4vw;
+  margin-right: 4vw;
+}
+
+div.option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 2em;
+  height: 50px;
+  width: 200px;
+  margin: 4px 4px 4px 4px;
+  cursor: pointer;
+  /* -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
+  /* -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.3);
+  transition: 0.4s;
+}
+
+div.option:hover {
+  background-color: greenyellow;
+}
+
+.option-checkbox {
+  margin: 0;
+  width: 20px;
+}
+
+.btns-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+form button {
+  margin-top: 4vh;
+  margin-bottom: 2vh;
+}
+
+.option.checked {
+  background-color: greenyellow;
+}
+
+.option.checked:hover {
+  transform: scale(1.02, 1.02);
+}
+
+section.btns-wrap button {
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+button.refresh-btn {
+  background-color: rgb(233, 233, 233);
+}
+
+/* MOBILE SCREENS */
+@media screen and (max-width: 480px) {
+  div.option {
+    width: 160px;
+  }
+}

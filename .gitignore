@@ -2,3 +2,4 @@ node_modules
 res/generated/*.jpg
 **/__pycache__
 **zip
+.ipynb_checkpoints

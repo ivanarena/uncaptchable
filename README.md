@@ -34,3 +34,7 @@ jupyter lab
 ```
 
 Once in jupyter lab you can execute the tests in ```crash_test.ipynb``` and customise the parameters as you like.
+
+# Documentation
+
+The documentation is accessible while running the app at http://localhost:9999/api-docs/ (in case you've changed the port where the API is running be sure to use the same one to access the documentation). 

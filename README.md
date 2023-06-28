@@ -1,6 +1,6 @@
 # UnCAPTCHAble 
 
-UnCATPCHAble is a brand new CAPTCHA that makes life really hard for AIs while still being easy to solve for humans.
+UnCAPTCHAble is a brand new CAPTCHA that makes life really hard for AIs while still being easy to solve for humans.
 
 # Requirements
 - Node.js v18.12.1

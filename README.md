@@ -32,8 +32,7 @@ cd crash_test
 python -m pip install -r requirements.txt
 jupyter lab
 ```
-
-Once in jupyter lab you can execute the tests in ```crash_test.ipynb``` and customise the parameters as you like.
+Once in jupyter lab you can execute the tests in ```crash_test.ipynb``` and customise the parameters as you like. In ```res/tests``` you can find some logs of the tests I run.
 
 # Documentation
 

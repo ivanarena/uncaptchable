@@ -33,7 +33,7 @@ app.get('/captcha', (req, res) => {
         })
         .catch((err) => {
             console.log(err)
-            res.status(401).send({ error: 'Bad request.' })
+            res.status(400).send({ error: 'Bad request.' })
         });
 });
 
@@ -44,7 +44,7 @@ app.get('/captcha/list', (req, res) => {
         })
         .catch((err) => {
             console.log(err)
-            res.status(401).send({ error: 'Bad request.' })
+            res.status(400).send({ error: 'Bad request.' })
         });
 });
 
@@ -57,7 +57,7 @@ app.get('/captcha/:id', (req, res) => {
         })
         .catch((err) => {
             console.log(err)
-            res.status(401).send({ error: 'The requested CAPTCHA does not exist.' })
+            res.status(404).send({ error: 'The requested CAPTCHA does not exist.' })
         });
 });
 
@@ -71,7 +71,7 @@ app.post('/captcha/:id/validate', (req, res) => {
             if (validation) {
                 res.send({ message: 'You solved the CAPTCHA! Here\'s a cookie for you: 🍪' })
             } else {
-                res.status(403).send({ message: 'The CAPTCHA was not solved correctly, try again.' })
+                res.status(401).send({ message: 'The CAPTCHA was not solved correctly, try again.' })
             }
         })
         .catch((err) => {

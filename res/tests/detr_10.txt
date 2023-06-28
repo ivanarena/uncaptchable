@@ -1,0 +1,15 @@
+============================================== DETR-ResNet50 Tests ==============================================================
+Answers = ['banana', 'shark'];			Found: NONE ([] detected with confidence []);
+Answers = ['donut', 'horse'];			Found: horse (detected with confidence 0.97);
+Answers = ['chair', 'zebra'];			Found: zebra (detected with confidence 0.999);
+Answers = ['banana', 'baseball'];			Found: banana (detected with confidence 0.905);
+Answers = ['banana', 'baseball'];			Found: banana (detected with confidence 0.999);
+Answers = ['chair', 'donut'];			Found: NONE ([] detected with confidence []);
+Answers = ['airplane', 'baseball'];			Found: NONE ([] detected with confidence []);
+Answers = ['beer', 'cow'];			Found: NONE ([] detected with confidence []);
+Answers = ['carrot', 'shark'];			Found: NONE (['boat'] detected with confidence [0.93]);
+Answers = ['orange', 'owl'];			Found: NONE (['bird'] detected with confidence [0.952]);
+=================================================================================================================================
+Images analysed: 10; at least one subject recognized: 4; both subjects recognized: 0.
+		     at least one subject recognized: 40.0%; both subjects recognized: 0.0%.
+=================================================================================================================================

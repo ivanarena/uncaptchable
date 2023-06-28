@@ -1,0 +1,14 @@
+=============================================== ResNet50 Tests =================================================================
+Answers = ['banana', 'shark'];			Found: NONE (classified as ['clumber', 'clumber spaniel', 'electric locomotive']);
+Answers = ['donut', 'horse'];			Found: NONE (classified as ['dogsled', 'dog sled', 'dog sleigh']);
+Answers = ['chair', 'zebra'];			Found: NONE (classified as ['trolleybus', 'trolley coach', 'trackless trolley']);
+Answers = ['banana', 'baseball'];			Found: NONE (classified as ['tow truck', 'tow car', 'wrecker']);
+Answers = ['banana', 'baseball'];			Found: NONE (classified as ['gorilla', 'Gorilla gorilla', 'howler monkey']);
+Answers = ['chair', 'donut'];			Found: NONE (classified as ['American chameleon', 'anole', 'Anolis carolinensis']);
+Answers = ['airplane', 'baseball'];			Found: NONE (classified as ['pizza', 'pizza pie', 'American Staffordshire terrier']);
+Answers = ['beer', 'cow'];			Found: NONE (classified as ['hard disc', 'hard disk', 'fixed disk']);
+Answers = ['carrot', 'shark'];			Found: NONE (classified as ['electric locomotive', 'Tibetan terrier', 'chrysanthemum dog']);
+Answers = ['orange', 'owl'];			Found: NONE (classified as ['Scottish deerhound', 'deerhound', 'three-toed sloth']);
+=================================================================================================================================
+Images analysed: 10; subjects recognized: 0.
+=================================================================================================================================

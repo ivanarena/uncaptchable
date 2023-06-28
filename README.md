@@ -28,7 +28,9 @@ npm start
 Download the generated dataset [here](https://mega.nz/file/qvRyQD5a#C36x-_8RHR7SFafeaw9wehNZTvyOVUiZW4p-lXCpSj8) and extract it in the ```res``` folder.
 
 ```
-cd crash_tests
+cd crash_test
 python -m pip install -r requirements.txt
-python image_classification.py
+jupyter lab
 ```
+
+Once in jupyter lab you can execute the tests in ```crash_test.ipynb``` and customise the parameters as you like.

@@ -15,7 +15,7 @@
     "canvas": "^2.11.2",
     "cors": "^2.8.5",
     "express": "^4.21.0",
-    "mongoose": "^8.8.3",
+    "mongoose": "^8.9.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "swagger-jsdoc": "^6.2.8",
